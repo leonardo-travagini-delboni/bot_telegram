@@ -1,7 +1,7 @@
 """ My personal Telegram BOT usyng python language. """
 
 ############################################################# CREDITS ##############################################################
-# BOT TELEGRAM - My personal Telegram BOT usyng python language.
+# MY PERSONAL BOT TELEGRAM
 # Developed by Leonardo Travagini Delboni
 # Version 1.0 - Since July 2023
 #####################################################################################################################################
@@ -19,9 +19,10 @@ import logging
 import datetime
 import telebot
 import setproctitle
+from typing import List
 
 # Common folder settings:
-from config_file import common_path
+from config import common_path
 sys.path.insert(0, common_path)
 
 # Importings from common folder:
@@ -218,20 +219,55 @@ def bot_telegram_main():
     @bot.message_handler(commands=['Opt3'])
     def option3(message):
         bot.send_message(message.chat.id, """Segue abaixo meu CV em PDF:""")
-        bot.send_document(message.chat.id, open('Curriculum - Leonardo Travagini Delboni.pdf', 'rb'))
-        bot.send_message(message.chat.id, """/Menu para voltar ao menu inicial.""") 
+        bot.send_document(message.chat.id, open('/root/main/projects/bot_telegram/Curriculum - Leonardo Travagini Delboni.pdf', 'rb'))
+        bot.send_message(message.chat.id, """/Menu para voltar ao menu inicial.""")
+
+    # Getting my Personal Portolfio (Opt4):
+    @bot.message_handler(commands=['Meu_Portolio'])
+    def meu_portfolio(message):
+        bot.send_message(message.chat.id, """Segue abaixo o link para acessar meu Portfólio Pessoal:\nhttps://leonardodelboni.com.br/\n/Menu para voltar ao menu inicial.""")
+        bot.send_message(message.chat.id, """/Opt4 para voltar ao menu anterior\n/Menu para voltar ao menu inicial""")
+    
+    # Getting my Whatsapp (Opt4):
+    @bot.message_handler(commands=['Meu_WhatsApp'])
+    def meu_whatsapp(message):
+        bot.send_message(message.chat.id, """Segue abaixo o link para me contatar via WhatsApp:\nhttps://api.whatsapp.com/send/?phone=5511994421880""")
+        bot.send_message(message.chat.id, """/Opt4 para voltar ao menu anterior\n/Menu para voltar ao menu inicial""")
+    
+    # Getting my LinkedIn (Opt4):
+    @bot.message_handler(commands=['Meu_LinkedIn'])
+    def meu_linkedin(message):
+        bot.send_message(message.chat.id, """Segue abaixo o link do meu LinkedIn:\nhttps://www.linkedin.com/in/leonardo-travagini-delboni-6b8a48bb""")
+        bot.send_message(message.chat.id, """/Opt4 para voltar ao menu anterior\n/Menu para voltar ao menu inicial""")
+
+    # Getting my GitHub (Opt4):
+    @bot.message_handler(commands=['Meu_GitHub'])
+    def meu_github(message):
+        bot.send_message(message.chat.id, """Segue abaixo o link do meu GitHub:\nhttps://github.com/leonardo-travagini-delboni""")
+        bot.send_message(message.chat.id, """/Opt4 para voltar ao menu anterior\n/Menu para voltar ao menu inicial""")
+    
+    # Getting my e-mail (Opt4):
+    @bot.message_handler(commands=['Meus_emails'])
+    def meu_email(message):
+        bot.send_message(message.chat.id, """Segue abaixo meu e-mail principal:\nleonardodelboni@gmail.com\nOu caso prefira, segue abaixo meu e-mail acadêmico:\nl172102@dac.unicamp.br""")
+        bot.send_message(message.chat.id, """/Opt4 para voltar ao menu anterior\n/Menu para voltar ao menu inicial""")
+
+    # Getting my phone number (Opt4):
+    @bot.message_handler(commands=['Meu_Telefone'])
+    def meu_telefone(message):
+        bot.send_message(message.chat.id, """Segue abaixo meu número de telefone:\n(11) 99442-1880""")
+        bot.send_message(message.chat.id, """/Opt4 para voltar ao menu anterior\n/Menu para voltar ao menu inicial""")
 
     # Option 4 - Get my contact data:
     @bot.message_handler(commands=['Opt4'])
     def option5(message):
-        bot.reply_to(message,"""Segue abaixo meus dados de contato:""")
-        bot.send_message(message.chat.id, """Meu Portfólio Pessoal: \nhttps://leonardodelboni.com.br/""")
-        bot.send_message(message.chat.id, """Meu WhatsApp: \nhttps://api.whatsapp.com/send/?phone=5511994421880""")
-        bot.send_message(message.chat.id, """Meu LinkedIn: \nhttps://www.linkedin.com/in/leonardo-travagini-delboni-6b8a48bb/""")
-        bot.send_message(message.chat.id, """Meu GitHub: \nhttps://github.com/leonardo-travagini-delboni""")
-        bot.send_message(message.chat.id, """Meu e-mail principal: \nleonardodelboni@gmail.com""")
-        bot.send_message(message.chat.id, """Meu e-mail acadêmico: \nl172102@dac.unicamp.br""")
-        bot.send_message(message.chat.id, """Meu número de telefone: \n(11) 99442-1880""")
+        bot.reply_to(message,"""Selecione uma das opcoes abaixo:
+\n/Meu_Portolio para acessar meu website pessoal
+/Meu_WhatsApp para acessar meu WhatsApp
+/Meu_LinkedIn para acessar meu LinkedIn
+/Meu_GitHub para acessar meu GitHub
+/Meus_emails para acessar meus e-mails
+/Meu_Telefone para acessar meu telefone""")
         bot.send_message(message.chat.id, """/Menu para voltar ao menu inicial.""")
 
     # Welcoming the user:
@@ -247,7 +283,7 @@ def bot_telegram_main():
 \n/Opt1 Projeto pessoal de Data Analysis
 /Opt2 Projetos de Web Development
 /Opt3 Obtenha meu CV em PDF
-/Opt4 Visualize meus dados de contato""")
+/Opt4 Dados de Contato""")
 
     # Sending the message:
     record(f'Starting the bot...','yellow')
@@ -269,4 +305,3 @@ setproctitle.setproctitle(f'monitor_bot_telegram')
 if __name__ == '__main__':
     bot_telegram_main()
     bot_telegram_sendtext(f'BOT TELEGRAM ENDED: {datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")}', warning_telegram_id)
-    
